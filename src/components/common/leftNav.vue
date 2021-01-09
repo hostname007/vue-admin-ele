@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-menu router @select="handSelect" :collapse="isCollapse" :default-active="$route.path" class="el-menu-vertical-demo" background-color="#394657" text-color="#fff" active-text-color="rgb(83, 199, 159)">
+		<el-menu router :collapse="isCollapse" :default-active="$route.path" class="el-menu-vertical-demo" background-color="#394657" text-color="#fff" active-text-color="rgb(83, 199, 159)">
 			<!--filterArr计算属性  已经过滤掉isshow为false的数据-->
 			<template v-for="(item,index) in items">
 				<!--有子集的-->
@@ -89,13 +89,6 @@
 				}
 				add = true;
 
-			},
-			handSelect(index, indexpath) {
-				console.log(index, indexpath)
-				this.indexBreadcrumbs = index
-			},
-			handChange() {
-				this.$store.commit('renderBread', this.breadcrumbList);
 			},
 		},
 		computed: {
