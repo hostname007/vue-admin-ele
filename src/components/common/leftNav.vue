@@ -9,7 +9,9 @@
 						<i :class="item.icon"></i>
 						<span slot="title">{{item.title}}</span>
 					</template>
-					<el-menu-item v-for="(item2,index) in item.subs" @click="addRouter(item2,item2.path)" :class="item2.path==$route.path?'is-active':''" :index="item2.path">
+					<el-menu-item v-for="(item2,index) in item.subs" 
+						:key="item2.title"
+						@click="addRouter(item2,item2.path)" :class="item2.path==$route.path?'is-active':''" :index="item2.path">
 						<i :class="item2.icon"></i>
 						<span slot="title">{{item2.title}}</span>
 					</el-menu-item>

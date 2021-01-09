@@ -22,6 +22,7 @@
 						  </span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item v-on:click.native="exitBtn">退出登录</el-dropdown-item>
+					<el-dropdown-item v-on:click.native="fullScreen">全屏</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</div>
@@ -46,14 +47,15 @@
 
 <script>
 	import leftNav from '@/components/common/leftNav';
+	import screenfull from 'screenfull';
 	import breadcrumb from '@/components/common/breadcrumb';
 	import { mapState, mapMutations, mapGetters } from 'vuex';
 	export default({
 		name: 'home',
 		data() {
 			return {
-				massage: 'aaaaa',
-				username: ''
+				username: '',
+				isFullscreen: false
 			}
 		},
 		computed: {
@@ -68,6 +70,16 @@
 
 		},
 		methods: {
+			fullScreen(){
+			        if (!screenfull.isEnabled) {
+			          this.$message({
+			            message: 'you browser can not work',
+			            type: 'warning'
+			          })
+			          return false
+			        }
+			        screenfull.toggle()
+			},
 			gomyCSDN(){
 				window.open("https://blog.csdn.net/qq_36675216?spm=1011.2124.3001.5343");
 			},
