@@ -22,19 +22,23 @@
 						  </span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item v-on:click.native="exitBtn">退出登录</el-dropdown-item>
-					<el-dropdown-item v-on:click.native="fullScreen">全屏</el-dropdown-item>
+						<el-dropdown-item v-on:click.native="fullScreen">全屏</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</div>
 		</div>
 		<div class="mainDiv">
-			<el-aside style="width: auto;">
+			<el-aside style="width: auto !important;">
 				<div class="leftNav">
-					<leftNav></leftNav>
+					<el-menu router :collapse="isCollapse" :default-active="$route.path" class="el-menu-vertical-demo" background-color="#394657" text-color="#fff" active-text-color="rgb(83, 199, 159)">
+						<!--动态生成-->
+						<leftNav :sideMenu="sideMenu"></leftNav>
+					</el-menu>
 				</div>
-					
+
 			</el-aside>
 			<div class="content-container">
+				<img class="myGitee" @click="gomyCSDN" src="../assets/widget_1.svg" />
 				<el-col :span="24" class="content-wrapper">
 					<transition name="fade" mode="out-in">
 						<router-view></router-view>
@@ -46,6 +50,7 @@
 </template>
 
 <script>
+	import sideMenu from '@/utils/config.js'; //左侧菜单数据
 	import leftNav from '@/components/common/leftNav';
 	import screenfull from 'screenfull';
 	import breadcrumb from '@/components/common/breadcrumb';
@@ -55,7 +60,8 @@
 		data() {
 			return {
 				username: '',
-				isFullscreen: false
+				isFullscreen: false,
+				sideMenu: []
 			}
 		},
 		computed: {
@@ -64,23 +70,23 @@
 				count(state) {
 					return state.count + '' + this.massage
 				},
-				arr: 'menuArr'
+				arr: 'menuArr',
+				isCollapse: 'isCollapse'
 			}),
 			...mapGetters(['addAsync'])
-
 		},
 		methods: {
-			fullScreen(){
-			        if (!screenfull.isEnabled) {
-			          this.$message({
-			            message: 'you browser can not work',
-			            type: 'warning'
-			          })
-			          return false
-			        }
-			        screenfull.toggle()
+			fullScreen() {
+				if(!screenfull.isEnabled) {
+					this.$message({
+						message: 'you browser can not work',
+						type: 'warning'
+					})
+					return false
+				}
+				screenfull.toggle()
 			},
-			gomyCSDN(){
+			gomyCSDN() {
 				window.open("https://blog.csdn.net/qq_36675216?spm=1011.2124.3001.5343");
 			},
 			exitBtn() {
@@ -103,8 +109,8 @@
 			})
 		},
 		created() {
-			console.log(this.$store.state.menuArr)
 			this.username = localStorage.getItem("username");
+			this.sideMenu = sideMenu;
 		},
 		components: {
 			leftNav,
@@ -113,7 +119,7 @@
 	})
 </script>
 
-<style scoped="scoped">
+<style scoped>
 	.fixedImg {
 		position: fixed;
 		right: 0;
@@ -183,7 +189,10 @@
 	.content-container {
 		width: 100%;
 		box-sizing: border-box;
-		padding: 5px;
+		padding: 15px;
+		background: #eceef2;
+		height: 100%;
+		overflow: auto;
 	}
 	
 	.el-dropdown-link {
@@ -198,5 +207,24 @@
 	.content-wrapper {
 		height: 100%;
 		overflow-y: auto;
+		background: white;
+		box-sizing: border-box;
+		padding: 10px;
+		border-radius: 8px;
+	}
+	
+	.myGitee {
+		position: absolute;
+		right: 0;
+		top: 90px;
+		cursor: pointer;
+	}
+	
+	.el-menu--collapse /deep/ .el-submenu .el-submenu__title span {
+		display: none;
+	}
+	
+	.el-menu--collapse /deep/ .el-submenu .el-submenu__title .el-icon-arrow-right {
+		display: none;
 	}
 </style>
