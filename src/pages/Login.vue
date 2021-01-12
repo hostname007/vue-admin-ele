@@ -47,13 +47,14 @@
 				this.$refs[formName].validate((valid) => {
 					if(valid) {
 						localStorage.setItem("username",this.ruleForm.username);
+						loacalStorage.setItem("token",'sad11111dfafwaf');
 						this.$message({
 					          message:'登陆成功',
 					          type: 'success'
 					        });
 						setTimeout(()=>{
 					        this.$router.push('/');
-						},1500)
+						},1500);
 						
 					} else {
 						this.isLoading=false;
