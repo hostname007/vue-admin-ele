@@ -20,9 +20,9 @@ let routes = [{
 		name: '登录页',
 		component: Login,
 		isshow: false,
-		meta: {
-			title: '登录页'
-		},
+		meta: [
+			{title: '登录页'}
+		],
 		dropmenu: false
 	},
 	{

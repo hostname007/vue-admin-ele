@@ -218,7 +218,7 @@
 		right: 0;
 		top: 90px;
 		cursor: pointer;
-		z-index: 111111111;
+		z-index: 111;
 	}
 	
 	.el-menu--collapse /deep/ .el-submenu .el-submenu__title span {

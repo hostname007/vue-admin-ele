@@ -1,6 +1,6 @@
 var express = require('express');
+require('./mock/mock.js');
 var app=express();
-
 var message=null;
 
 app.get('/xxx',function(req,res){

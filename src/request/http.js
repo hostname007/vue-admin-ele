@@ -4,7 +4,7 @@ import { Message } from 'element-ui';
 
 //弹窗窗口
 const message = m => {
-	this.$message({
+	Message({
 		message: m,
 		type: 'warning'
 	});
@@ -17,7 +17,7 @@ const toLogin = () => {
 	router.replace({
 		path: '/login',
 		query: {
-			redirece: router.currentRoute.fullPath
+			redirect: router.currentRoute.fullPath
 		}
 	})
 }
